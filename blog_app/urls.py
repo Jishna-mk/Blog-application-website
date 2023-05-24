@@ -10,5 +10,5 @@ urlpatterns = [
     path("my_blog",views.my_blog,name="my_blog"),
     path("update_page/<int:bid>",views.update_page,name="update_page"),
     path("delete_page/<int:bid>",views.delete_page,name="delete_page"),
-    path("add_like/<int:bid>/<int:Likes>",views.add_like,name="add_like")
+    # path("user/add_like/<int:bid>/<int:Likes>/",views.add_like,name="add_like")
 ]

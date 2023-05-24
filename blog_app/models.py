@@ -19,4 +19,12 @@ class BlogList(models.Model):
     Blog_detail=models.CharField(max_length=1000)
     Blog_image=models.ImageField(upload_to="blogs")
     Likes=models.IntegerField(default=0)
+    BLOG_CATEGORIES=[  
+        ('option1', 'Business'),
+        ('option2', 'Culture'),
+        ('option3', 'Food'),
+        ('option4','Technology'),
+        ('option4','Social'),
+    ]
+    Blog_category=models.CharField(max_length=500,choices=BLOG_CATEGORIES,default=0)
 

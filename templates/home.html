@@ -73,8 +73,6 @@ h1{
     border: 1px solid gray;
     padding: 20px;
     background-color:#f5f4e6 ;
-   
-   
 }
 .second{
     margin-left: 15px;
@@ -138,7 +136,8 @@ body{
     </div>
     <h1>NEW BLOGS</h1><a href="{%url 'add_blog'%}"class="btn1"><button class="new-btn " >ADD BLOG</button></a>
     <a href="{%url 'my_blog'%}"><button class="new-btn" >MY BLOG</button></a>
-   {%for blog in all_blogs %}
+    {% for blog in page_obj.object_list%}
+    {% comment %} {%for blog in all_blogs %}  {% endcomment %}
     <div class="first">
         <img src="{{blog.Blog_image.url}}" alt="nature">
         <!-- <p>{{blog.blog_image.url}}</p> -->
@@ -150,11 +149,24 @@ body{
             <p class="date">Published Date :{{blog.Published_date}}</p>
             
             <p class="para">{{blog.Blog_detail}}</p>
-            <a href="{%url 'add_like' blog.id blog.Likes %}"><button class="one">Like <i  class="fa fa-thumbs-up"></i>{{blog.Likes}}</button></a>
+            {% comment %} <a href="{%url 'add_like' blog.id  %}"><button class="one">Like <i  class="fa fa-thumbs-up"></i>{{blog.Likes}}</button></a> {% endcomment %}
        </div>
     </div>
     
     {%endfor%}
+   
+    <center>
+        {%if page_obj.has_previous %} {# whether the previous page exists #}
+            <a href="?page={{page_obj.previous_page_number}}">Previous</a> {# link to the prev page #}
+        {% endif %}
+        <span>{{page_obj.number}}</span> {# the current page number #}
+        
+        {%if page_obj.has_next %} {# whether the next page exists #}
+            <a href="?page={{page_obj.next_page_number}}">Next</a> {# link to the next page #}
+        {% endif %}
+    </center>
+    
+    
 </body>
 </html>
 

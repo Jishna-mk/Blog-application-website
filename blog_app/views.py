@@ -10,13 +10,23 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from.models import BlogList
 from.decorators import user_only
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 
 # Create your views here
 
 
 def first(request):
     blogs=BlogList.objects.all().order_by("-Published_date")
-    return render(request, "home.html",{"all_blogs":blogs})
+    p=Paginator(blogs,5)
+    page_number=request.GET.get('page')
+    try:
+        page_obj=p.get_page(page_number)
+    except PageNotAnInteger:
+        page_obj=p.page(1)  
+    except EmptyPage:
+        page_obj=p.page(p.num_pages)    
+              
+    return render(request, "home.html",{'page_obj':page_obj})
 
 
 def signup(request):
