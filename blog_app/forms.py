@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from.models import BlogList
 
 class UserAddForm(UserCreationForm):
+    
 
     class Meta:
         model = User

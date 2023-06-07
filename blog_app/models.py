@@ -2,6 +2,7 @@
 from email.policy import default
 from unittest.util import _MAX_LENGTH
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 # class UsersList(models.Model):
@@ -18,7 +19,7 @@ class BlogList(models.Model):
     Published_date=models.DateField()
     Blog_detail=models.CharField(max_length=1000)
     Blog_image=models.ImageField(upload_to="blogs")
-    Likes=models.IntegerField(default=0)
+
     BLOG_CATEGORIES=[  
         ('option1', 'Business'),
         ('option2', 'Culture'),
@@ -26,5 +27,11 @@ class BlogList(models.Model):
         ('option4','Technology'),
         ('option4','Social'),
     ]
-    Blog_category=models.CharField(max_length=500,choices=BLOG_CATEGORIES,default=0)
+    Blog_category=models.CharField(max_length=500,choices=BLOG_CATEGORIES,default='option4',null=True,blank=True)
+    # Addlikes = models.ManyToManyField(User,related_name='blog')
 
+
+class Blog_likes(models.Model):
+   
+    bloglikes= models.IntegerField(default=1)
+    

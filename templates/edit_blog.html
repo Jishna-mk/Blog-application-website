@@ -58,13 +58,13 @@ button{
       {% csrf_token %}
       
       <label for="" >BLOG NAME</label>
-      <input type="text" name="Blog_title" required value="{{single_blog.Blog_title}}"><br><br>
+      <input type="text" name="Blog_title" value="{{single_blog.Blog_title}}" required><br><br>
       <!-- <label for="">AUTHOR NAME</label> -->
       <!-- <input type="text" name="Author_name" value="{{request.user.username}}" readonly><br><br> -->
       <!-- <label for="">PUBLISHED DATE</label> -->
       <!-- <input type="date" name="Published_date" required value="{{single_blog.Published_date}}"><br><br> -->
       <label for="">BLOG DESCRIPTION</label>
-      <input type="text" name="Blog_detail" required value="{{single_blog.Blog_detail}}"><br><br>
+      <input type="text" name="Blog_detail"  value="{{single_blog.Blog_detail}}" required><br><br>
       <label for=""> ADD IMAGE</label>
       <input type="file" name="Blog_image" required><br><br>
 

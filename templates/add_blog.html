@@ -44,6 +44,23 @@ body{
     background-repeat: no-repeat;
     min-height: 100vh;
 }
+
+.data-form label {
+    display: inline;
+    text-align: center;
+    vertical-align: top;
+    
+}
+.data-form textarea {
+    margin-right: 9px;
+    display: inline-block;
+    width: 70%;
+    min-width: 50px;
+    background-color: burlywood;
+}
+.data-form textarea:hover{
+    background-color: beige;   
+}
 </style>
     <h1>ADD BLOG</h1>
     
@@ -55,16 +72,48 @@ body{
     <form method="post" enctype="multipart/form-data"> 
         {% csrf_token %}
     <div class="hero">
-        <label for="" >BLOG NAME</label>
-        <input type="text" name="Blog_title" required><br><br>
+        <div class="form-blog">
+          <label for="" >BLOG NAME</label>
+          <input type="text" name="Blog_title" required><br><br>
+       </div>
+       <div class="form-blog">
         <label for="">AUTHOR NAME</label>
         <input type="text" name="Author_name" value="{{request.user.username}}" readonly><br><br>
+       </div> 
+       <div class="form-blog">
         <label for="">PUBLISHED DATE</label>
         <input type="date" name="Published_date" required><br><br>
-        <label for="">BLOG DESCRIPTION</label>
-        <input type="text" name="Blog_detail" required><br><br>
-        <label for=""> ADD IMAGE</label>
-        <input type="file" name="Blog_image" required><br><br>
+      </div>
+
+       <!-- <label for="" class="para" name='Blog_category'>BLOG CATEGORY</label>
+         <form method="POST">
+           <select name="dropdown">
+              <option value="option1">Business</option>
+              <option value="option2">Culture</option>
+              <option value="option3">Food</option>
+              <option value="option4">Technology</option>
+              <option value="option5">Social</option>
+           </select>
+        <input type="submit" value="Submit" name='Blog_category'>
+        </form> -->
+<!-- 
+Display selected category
+{% if selected_category %}
+    <p>Selected Category: {{ selected_category }}</p>
+{% endif %} -->
+
+          <!-- <h1>Selected option:</h1> -->
+          
+        <br><br>
+        <div class="data-form">   
+            <label for="">BLOG DESCRIPTION</label>
+            <!-- <input type="text" name="Blog_detail" required><br><br> -->
+            <textarea name="Blog_detail" id="" cols="50" rows="10" required></textarea><br><br>
+        </div>
+        <div class="form-blog">
+           <label for=""> ADD IMAGE</label>
+           <input type="file" name="Blog_image" required><br><br>
+        </div> 
     
         <button type="submit">ADD BLOG</button><br><br>
     </div>
