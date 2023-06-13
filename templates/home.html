@@ -264,6 +264,23 @@ body{
 
 
             <a href="{%url 'like_post' blog.id  %}"><button class="one">Like <i  class="fa fa-thumbs-up"></i>{{blog.Likes}}</button></a>
+            
+    <!-- Other post content -->
+
+   
+    <form method="POST" action="{% url 'like_post' pk=blog.pk %}">
+      {% csrf_token %}
+      <button type="submit" class="like-button">
+          {% if user in blog.likes.all %}
+              Unlike
+          {% else %}
+              Like
+          {% endif %}
+      </button>
+  </form>
+
+  <p class="total-likes">Total Likes: {{ blog.total_likes }}</p>
+
             {%comment%}
             <!-- <div class="likes">
                 <p class="num-of-likes">{{ blog.likes }}</p>

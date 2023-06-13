@@ -9,10 +9,9 @@ from blog_app.forms import BlogListForm, UserAddForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from.models import BlogList
-from.models import Blog_likes
 from.decorators import user_only
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
-
+from.models import BlogPost
 # Create your views here
 
 
@@ -109,12 +108,12 @@ def delete_page(request,bid):
 
 
 
-def like_post(request, bid):
-    blog = Blog_likes.objects.get(id=bid)
-    blog.bloglikes += 1
-    blog.save()
+# def like_post(request, bid):
+#     blog = Blog_likes.objects.get(id=bid)
+#     blog.bloglikes += 1
+#     blog.save()
 
-    return redirect("first")
+#     return redirect("first")
 
       
 
@@ -179,3 +178,16 @@ def about(request):
     return render(request,"about.html")
 def index(request):
     return render(request,"index.html")
+
+from django.shortcuts import get_object_or_404
+def like_post(request, pk):
+    post = get_object_or_404(BlogPost, pk=pk)
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            if request.user in post.likes.all():
+                post.likes.remove(request.user)
+            else:
+                post.likes.add(request.user)
+
+    return render(request, 'home.html', {'post': post})
